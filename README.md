@@ -35,25 +35,21 @@ The objective was to take 200+ pages of high-quality content and transform them 
 │
 ├── /old-website         <-- THE ARCHIVE
 │   └── /source-data     <-- Original Scraped JSON/HTML
-│
-└── /redesign            <-- THE AGENT SYSTEM (Reusable Code)
-    ├── /scraper         <-- BFS Python Crawler Template
-    └── /generator       <-- Dynamic Page Generation Engine
 ```
 
 ---
 
 ## ⚙️ Technical Process (How it was built)
 
-1.  **AI-Powered Scraping**: Using a custom Python BFS crawler to extract structured JSON content while preserving metadata.
-2.  **Design System Generation**: Leveraging the `UI/UX Pro Max` design intelligence tool to select premium palettes and modern typography.
-3.  **Dynamic Generation**: Building custom `PageGenerator` classes to turn JSON content into semantically correct, SEO-friendly HTML.
-4.  **Polish & Link Migration**: Running automated cleanup scripts to fix legacy text artifacts and migrate all external links to local relative paths.
+1.  **Content Auditing & Extraction**: Methodically identifying and structuring legacy content via programmatic extraction techniques.
+2.  **Modern Design Architecture**: Establishing a fresh, responsive design system emphasizing premium color palettes, readability, and modern web best practices.
+3.  **Semantic Reconstruction**: Converting the extracted legacy data into pristine, semantically correct, and highly accessible HTML5/CSS3.
+4.  **Legacy Link Rectification**: Implementing programmatic routing to mass-migrate outdated external URL references to the new structured local paths.
 
 ---
 
 ## 👤 About
-This project was developed as part of a high-end web development portfolio to demonstrate expertise in **automation**, **design systems**, and **mass-scale content migration**.
+This project was developed as part of a high-end web development portfolio to demonstrate expertise in **modern web architecture**, **systematic design**, and **mass-scale content migration**.
 
 ---
 
