@@ -7,7 +7,7 @@ This project showcases the successful redesign and modernization of two legacy C
 ---
 
 ## 🔗 Live Demos
-*   **✨ New Website Redesign**: [View Redesign (Deploy to Netlify)](https://your-netlify-url.netlify.app/)
+*   **✨ New Website Redesign**: [View Redesign Live](https://69a32fa34139357bcd76b688--joyheart.netlify.app/)
 *   **🏛️ Legacy Site Archive**: [View Original Scraped Content](./old-website/)
 
 ---
