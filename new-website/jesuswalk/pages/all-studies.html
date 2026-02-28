@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse all 58 free JesusWalk Bible studies.">
+<title>All Bible Studies — JesusWalk Bible Study Series</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../index.css">
+</head>
+<body>
+<nav class="navbar scrolled"><div class="container nav-container">
+<a href="../index.html" class="nav-brand">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+  <div><span class="brand-name">JesusWalk</span><span class="brand-tagline">BIBLE STUDY SERIES</span></div>
+</a>
+<div class="nav-links">
+  <a href="all-studies.html">All Studies</a>
+  <a href="books.html">Books</a>
+  <a href="podcast.html">Podcast</a>
+  <a href="beginning.html">New Believers</a>
+  <a href="all-studies.html" class="btn btn-primary nav-cta">Start Studying</a>
+</div>
+</div></nav>
+
+  <section class="hero" style="padding-bottom:40px;">
+    <div class="container"><div class="hero-content animate-in">
+      <div class="hero-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/></svg> Full Catalog</div>
+      <h1>All 58 Bible <em>Studies</em></h1>
+      <p class="hero-description">Browse the complete JesusWalk Bible Study Series — Old Testament, New Testament, and Topical.</p>
+    </div></div>
+  </section>
+
+  <!-- Section Jump Bar + Search -->
+  <div id="section-jump-bar" style="
+    position: sticky; top: 64px; z-index: 100;
+    background: var(--bg-card, #fff);
+    border-bottom: 1px solid var(--border-color, #e8e4f0);
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(62,50,101,0.08);
+  ">
+    <div class="container" style="display:flex; align-items:center; gap:12px; padding-top:10px; padding-bottom:10px; flex-wrap:wrap;">
+      <!-- Search -->
+      <div style="position:relative; flex:1; min-width:180px; max-width:280px;">
+        <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:0.4;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="study-search" type="search" placeholder="Search studies..." aria-label="Search Bible studies" style="width:100%;padding:8px 10px 8px 34px;border:1px solid var(--border-color,#e8e4f0);border-radius:8px;font-size:0.85rem;background:var(--bg-surface,#f8f6ff);outline:none;font-family:inherit;">
+      </div>
+      <!-- Section Pills -->
+      <nav style="display:flex; gap:6px; flex-wrap:wrap;" aria-label="Jump to section">
+        <a href="#old-testament"  class="jump-pill">Old Testament</a>
+        <a href="#gospels"        class="jump-pill">Gospels</a>
+        <a href="#acts"           class="jump-pill">Acts</a>
+        <a href="#pauls-letters"  class="jump-pill">Paul's Letters</a>
+        <a href="#general-letters"class="jump-pill">General Letters</a>
+        <a href="#revelation"     class="jump-pill">Revelation</a>
+        <a href="#topical"        class="jump-pill">Topical</a>
+      </nav>
+    </div>
+  </div>
+  <style>
+    .jump-pill {
+      display:inline-block; padding:5px 12px; border-radius:20px;
+      font-size:0.78rem; font-weight:600; letter-spacing:.02em;
+      background: var(--bg-surface, #f8f6ff);
+      color: var(--color-primary, #3E3265);
+      border: 1px solid var(--border-color, #e8e4f0);
+      text-decoration:none; transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .jump-pill:hover, .jump-pill.active {
+      background: var(--color-primary, #3E3265);
+      color: #fff; border-color: var(--color-primary, #3E3265);
+    }
+    /* Offset anchor scroll for sticky nav + jump bar */
+    [id^="old-testament"],[id^="gospels"],[id^="acts"],
+    [id^="pauls-letters"],[id^="general-letters"],
+    [id^="revelation"],[id^="topical"] {
+      scroll-margin-top: 130px;
+    }
+    /* Search hidden state */
+    .study-card.hidden { display: none !important; }
+    .section-group.empty { display: none !important; }
+    #no-results {
+      display:none; text-align:center; padding:60px 20px;
+      color: var(--text-muted, #888); font-size:1.1rem;
+    }
+    html { scroll-behavior: smooth; }
+  </style>
+  <script>
+    // Live search filter
+    const searchInput = document.getElementById('study-search');
+    const noResults   = document.getElementById('no-results');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const q = this.value.trim().toLowerCase();
+        const cards = document.querySelectorAll('.study-card');
+        let visibleCount = 0;
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          const show = !q || text.includes(q);
+          card.classList.toggle('hidden', !show);
+          if (show) visibleCount++;
+        });
+        // Hide empty section groups
+        document.querySelectorAll('.section-group').forEach(sg => {
+          const visible = sg.querySelectorAll('.study-card:not(.hidden)').length;
+          sg.classList.toggle('empty', visible === 0);
+        });
+        if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      });
+    }
+    // Active pill on scroll
+    const pills = document.querySelectorAll('.jump-pill');
+    const sections = ['old-testament','gospels','acts','pauls-letters','general-letters','revelation','topical'];
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 160) current = id;
+      });
+      pills.forEach(p => {
+        p.classList.toggle('active', p.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+  <div id="no-results" class="container" style="display:none;">
+    No studies found. Try a different search term.
+  </div>
+
+  <section class="section"><div class="container">
+      <div class="section-group" id="sg-old-testament"><div id="old-testament" class="section-header" style="">
+        <div class="section-label">Old Testament</div>
+        <h2 class="section-title">Old Testament Studies</h2>
+      </div>
+      <div class="studies-grid">
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Abraham</h3>
+          <p>10 studies from Genesis 12-25</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Jacob</h3>
+          <p>7 lessons, Genesis 25-49</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Moses</h3>
+          <p>9 lessons, Exodus and Numbers</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Joshua</h3>
+          <p>8 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Gideon</h3>
+          <p>4 lessons, Judges 6-9</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>David</h3>
+          <p>12 lessons, 1 &amp; 2 Samuel</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Solomon</h3>
+          <p>6 lessons, 1 Kings 1-11</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Elijah</h3>
+          <p>7 lessons, 1 Kings 17-2 Kings 2</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Psalms</h3>
+          <p>12 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Songs of Ascent</h3>
+          <p>Psalms 120-134, 15 daily meditations</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Isaiah</h3>
+          <p>11 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Messianic Scriptures</h3>
+          <p>Advent devotions</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Daniel</h3>
+          <p>9 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Rebuild &amp; Renew: Ezra, Nehemiah, Haggai, Zechariah &amp; Malachi</h3>
+          <p>10 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>Names &amp; Titles of God</h3>
+          <p>11 parts</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="jw_discipleship.html" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Old Testament</div>
+          <h3>The Discipleship Process</h3>
+          <p>6 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a></div>
+      </div><div class="section-group" id="sg-gospels"><div id="gospels" class="section-header" style="margin-top:80px;">
+        <div class="section-label">Gospels</div>
+        <h2 class="section-title">Gospels</h2>
+      </div>
+      <div class="studies-grid">
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>The Christmas Incarnation</h3>
+          <p>4 weeks, Advent season</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>Sermon on the Mount</h3>
+          <p>Matthew 5-7, 13 weeks</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>Mark's Gospel</h3>
+          <p>35 lessons (brief notes)</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>Luke's Gospel</h3>
+          <p>140 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>John's Gospel</h3>
+          <p>34 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>7 Last Words from the Cross</h3>
+          <p>7 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>Parables</h3>
+          <p>12 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>Jesus and the Kingdom</h3>
+          <p>10 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>Resurrection</h3>
+          <p>5 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Gospels</div>
+          <h3>The Apostle Peter</h3>
+          <p>11 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a></div>
+      </div><div class="section-group" id="sg-acts"><div id="acts" class="section-header" style="margin-top:80px;">
+        <div class="section-label">Acts</div>
+        <h2 class="section-title">Acts of the Apostles</h2>
+      </div>
+      <div class="studies-grid">
+        <a href="all-studies.html#acts" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Acts</div>
+          <h3>Acts I: The Early Church</h3>
+          <p>9 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#acts" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Acts</div>
+          <h3>Acts II: Apostle Paul</h3>
+          <p>Acts 13–28, 11 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#gospels" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Acts</div>
+          <h3>The Apostle Peter</h3>
+          <p>11 Lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a></div>
+      </div><div class="section-group" id="sg-pauls-letters"><div id="pauls-letters" class="section-header" style="margin-top:80px;">
+        <div class="section-label">Paul's Letters</div>
+        <h2 class="section-title">Paul's Letters</h2>
+      </div>
+      <div class="studies-grid">
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>Christ Powered Life</h3>
+          <p>Romans 5-8, 8 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>1 Corinthians</h3>
+          <p>15 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>2 Corinthians</h3>
+          <p>11 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>Galatians</h3>
+          <p>7 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>Ephesians</h3>
+          <p>16 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#acts" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>Vision for the Church</h3>
+          <p>5 lessons from Ephesians</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>Philippians</h3>
+          <p>9 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>Colossians &amp; Philemon</h3>
+          <p>9 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>1 &amp; 2 Thessalonians</h3>
+          <p>9 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#pauls-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Paul's Letters</div>
+          <h3>1 &amp; 2 Timothy &amp; Titus</h3>
+          <p>13 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a></div>
+      </div><div class="section-group" id="sg-general-letters"><div id="general-letters" class="section-header" style="margin-top:80px;">
+        <div class="section-label">General Letters</div>
+        <h2 class="section-title">General Letters</h2>
+      </div>
+      <div class="studies-grid">
+        <a href="all-studies.html#general-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">General Letters</div>
+          <h3>Hebrews</h3>
+          <p>13 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#general-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">General Letters</div>
+          <h3>James</h3>
+          <p>8 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#general-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">General Letters</div>
+          <h3>1 Peter</h3>
+          <p>11 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#general-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">General Letters</div>
+          <h3>2 Peter and Jude</h3>
+          <p>6 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#general-letters" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">General Letters</div>
+          <h3>John's Letters</h3>
+          <p>1, 2, 3 John — 8 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a></div>
+      </div><div class="section-group" id="sg-revelation"><div id="revelation" class="section-header" style="margin-top:80px;">
+        <div class="section-label">Revelation</div>
+        <h2 class="section-title">Revelation</h2>
+      </div>
+      <div class="studies-grid">
+        <a href="all-studies.html#revelation" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Revelation</div>
+          <h3>Revelation</h3>
+          <p>8 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#revelation" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Revelation</div>
+          <h3>The Conquering Lamb of Revelation</h3>
+          <p>24 daily meditations</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a></div>
+      </div><div class="section-group" id="sg-topical"><div id="topical" class="section-header" style="margin-top:80px;">
+        <div class="section-label">Topical</div>
+        <h2 class="section-title">Topical Studies</h2>
+      </div>
+      <div class="studies-grid">
+        <a href="jw_discipleship.html" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Discipleship Process</h3>
+          <p>6 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>The Glorious Kingdom</h3>
+          <p>6 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Grace</h3>
+          <p>9 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Great Prayers of the Bible</h3>
+          <p>11 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Holy Spirit</h3>
+          <p>11 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Humility</h3>
+          <p>7 Lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="jw_beginning.html" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Beginning the Journey</h3>
+          
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Lamb of God</h3>
+          <p>5 lessons, Lenten series</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Listening for God's Voice</h3>
+          
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Lord's Supper</h3>
+          <p>10 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#old-testament" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Names &amp; Titles of God</h3>
+          <p>11 parts</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a>
+        <a href="all-studies.html#topical" class="study-card" style="text-decoration:none;color:inherit;">
+          <div class="study-card-category">Topical</div>
+          <h3>Names &amp; Titles of Jesus</h3>
+          <p>12 lessons</p>
+          <div class="study-card-meta"><span>Start Study →</span></div>
+        </a></div></div></div></section>
+<footer class="footer"><div class="container">
+<div class="footer-bottom">
+  <span>© 2026 Joyful Heart Renewal Ministries, Inc. — Dr. Ralph F. Wilson</span>
+  <span><a href="../index.html" style="color: var(--color-secondary-light);">JesusWalk Home</a></span>
+</div>
+</div></footer>
+</body>
+</html>

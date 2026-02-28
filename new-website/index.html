@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Redesign Portfolio | Before vs After</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3E3265;
+            --secondary: #D4A843;
+            --bg: #F8F9FA;
+            --text: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e1a3a 100%);
+            color: var(--white);
+            margin-bottom: 60px;
+            border-bottom: 6px solid var(--secondary);
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.05em;
+        }
+
+        .header-content p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img {
+            height: 250px;
+            background: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img.jh {
+            background: linear-gradient(135deg, #3E3265 0%, #6B5CA5 100%);
+        }
+
+        .card-img.jw {
+            background: linear-gradient(135deg, #4A4E69 0%, #22223B 100%);
+        }
+
+        .card-img::after {
+            content: "Redesigned";
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(62, 50, 101, 0.08);
+            color: var(--primary);
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 18px;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .stats {
+            display: flex;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            gap: 20px;
+        }
+
+        .stat-item span {
+            display: block;
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+        }
+
+        .stat-item strong {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        footer {
+            margin-top: 100px;
+            padding: 60px;
+            text-align: center;
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+
+        .portfolio-back {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .portfolio-back:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container header-content">
+            <h1>Redesign Showcase</h1>
+            <p>A comprehensive transformation of legacy ministry websites into modern, user-centric experiences.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            <!-- Joyful Heart -->
+            <div class="card">
+                <div class="card-img jh"></div>
+                <div class="card-content">
+                    <div class="card-tag">Bible Ministry</div>
+                    <h2>Joyful Heart Redesign</h2>
+                    <p>Clean typography, responsive layout, and improved navigation for 200+ articles and devotionals.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span>Pages</span>
+                            <strong>215+</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Speed Improvement</span>
+                            <strong>40% faster</strong>
+                        </div>
+                    </div>
+                    <a href="./joyful-heart/index.html" class="btn">View Live Demo →</a>
+                </div>
+            </div>
+
+            <!-- JesusWalk -->
+            <div class="card">
+                <div class="card-img jw"></div>
+                <div class="card-content">
+                    <div class="card-tag">Study Catalog</div>
+                    <h2>JesusWalk Redesign</h2>
+                    <p>A modern catalog with sticky navigation, live search/filtering, and optimized study material
+                        accessibility.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span>Feature</span>
+                            <strong>Live Filter</strong>
+                        </div>
+                        <div class="stat-item">
+                            <span>Experience</span>
+                            <strong>Touch optimized</strong>
+                        </div>
+                    </div>
+                    <a href="./jesuswalk/index.html" class="btn">View Live Demo →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Website Redesign Project Portfolio</p>
+        <a href="https://github.com/your-username" class="portfolio-back">← Back to my GitHub Repo</a>
+    </footer>
+
+</body>
+
+</html>

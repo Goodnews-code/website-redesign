@@ -1,0 +1,12 @@
+node_modules/
+.agents/
+.skills/
+*.json
+joyful-heart-redesign/
+jesuswalk-redesign/
+Church Automation/
+research/
+__pycache__/
+venv/
+*.log
+.env
