@@ -7,7 +7,7 @@ This project showcases the successful redesign and modernization of two legacy C
 ---
 
 ## 🔗 Live Demos
-*   **✨ New Redesigned Website**: [View The Redesign Live](https://69a32fa34139357bcd76b688--joyheart.netlify.app/)
+*   **✨ New Redesigned Website**: [View The Redesign Live](https://joyheart.netlify.app/)
 *   **🏛️ Original Legacy Website**: [View Old Website (joyfulheart.com)](https://www.joyfulheart.com/)
 
 ---
