@@ -1,4 +1,4 @@
-# 🚀 Automated Website Redesign Project | Before vs After
+# 🚀 Website Redesign Project | Before vs After
 
 > **A professional demonstration of modernizing high-content legacy websites.**
 
