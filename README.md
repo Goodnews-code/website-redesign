@@ -54,4 +54,4 @@ This project was developed as part of a high-end web development portfolio to de
 ---
 
 > [!NOTE]
-> If you are the owner of the original sites, please see the live Netlify link above for a demonstration of how your content looks with modern architecture.
+> I am not the owner of the original sites, it is a demo, please see the live Netlify link above for a demonstration of how the content looks with modern architecture compared to the old architecture.
